@@ -32,3 +32,27 @@ def insertionSort(data):
             j = j - 1
         data[j+1] = key
         draw(j+1, data)
+
+
+def heapify(data, index, size):
+    largest = index
+    left = 2 * index + 1
+    right = 2 * index + 2
+    if left < size and data[left] > data[largest]:
+        largest = left
+    if right < size and data[right] > data[largest]:
+        largest = right
+    if largest != index:
+        data[largest], data[index] = data[index], data[largest]
+        heapify(data, largest, size)
+        draw(largest, data)
+
+
+def heapSort(data):
+    data_length = len(data)
+    for i in range(data_length // 2 - 1, -1, -1):
+        heapify(data, i, data_length)
+    for i in range(data_length-1, 0, -1):
+        data[0], data[i] = data[i], data[0]
+        heapify(data, 0, i)
+    return data
